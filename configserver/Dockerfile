@@ -1,4 +1,4 @@
-FROM maslick/minimalka:jdk11
+FROM openjdk:17-oracle
 VOLUME /tmp
 ADD target/*.jar app.jar
 ENV JAVA_OPTS=""

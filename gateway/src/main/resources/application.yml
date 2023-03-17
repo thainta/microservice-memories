@@ -7,8 +7,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: calculation-service
-          uri: lb://CURRENCY-CALCULATION-SERVICE/
+        - id: main
+          uri: lb://MAIN/
           predicates:
             - Path=/**
 

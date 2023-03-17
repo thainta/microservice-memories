@@ -36,9 +36,9 @@ services:
       - eureka-server
     ports:
       - "8765:8765"
-  currency-exchange-service:
+  post-service:
     build:
-      context: /currency-exchange-service
+      context: /post-service
       dockerfile: Dockerfile
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
@@ -51,9 +51,9 @@ services:
     deploy:
       mode: replicated
       replicas: 2
-  currency-calculation-service:
+  main:
     build:
-      context: /currency-calculation-service
+      context: /main
       dockerfile: Dockerfile
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
@@ -64,4 +64,4 @@ services:
       - eureka-server
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
