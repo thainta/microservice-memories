@@ -5,6 +5,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.example.main.builder.AccountBuilder;
+import com.example.main.repository.repositoryJPA.AccountBuilderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -28,6 +31,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     @Autowired
     private final UserDetailsService userDetailsService;
+    @Autowired
+    AccountBuilderRepository accountBuilderRepository;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -60,13 +65,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         //Perform our validation process
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = accountBuilderRepository.findByEmail(userEmail).get();
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities()
                 );
+                System.out.println(userDetails.getAuthorities());
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);

@@ -100,16 +100,19 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public AuthenticationResponse authenticate(Accounts account) throws AccountNotFoundException {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            account.getEmail(),
-                            account.getHashPassword()
-                    )
-            );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
             AccountBuilder user = accountBuilderRepository.findByEmail(account.getEmail())
                     .orElseThrow();
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    user,
+                    null,
+                    user.getAuthorities()
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
             Long user_id = accountsRepository.findByEmail(account.getEmail()).isPresent() ? accountsRepository.findByEmail(account.getEmail()).get().getUsers().getUser_id() : null;
+            if(accountsRepository.findByEmail(account.getEmail()).get().getIsArchieved() != 0){
+                throw new AccountNotFoundException("Account is banned");
+            }
             var jwtToken = jwtService.generateToken(user);
             return AuthenticationResponse.builder().token(jwtToken).
                     result(user).

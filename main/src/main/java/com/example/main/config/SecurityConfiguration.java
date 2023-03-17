@@ -23,6 +23,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .antMatchers("/api/accounts/signin","/api/accounts/signup", "/resources/**", "/css/**", "/js/**", "/images/**", "/vendors/**", "/error/**","/pages/doLogin", "/pages/login")
                 .permitAll()
+                .antMatchers("/pages/**").hasAnyAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

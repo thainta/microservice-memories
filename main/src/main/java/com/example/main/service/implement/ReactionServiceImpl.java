@@ -123,15 +123,16 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
-    public Boolean deleteReaction(Long id) throws ReactionsNotFoundException {
+    public Boolean deleteReaction(Long postId,Long userId) throws ReactionsNotFoundException {
         try{
-            ReactionsEntity reactionsEntity = reactionRepository.findById(id).isPresent() ? reactionRepository.findById(id).get() : null;
+            ReactionsEntity reactionsEntity = reactionRepository.findByPostIdAndUserId(postId, userId).isPresent() ?
+                    reactionRepository.findByPostIdAndUserId(postId, userId).get() : null;
             assert reactionsEntity != null;
             reactionRepository.delete(reactionsEntity);
             return true;
         }
         catch (NoSuchElementException e){
-            throw new ReactionsNotFoundException(String.format("Could not found any reaction with id %s", id));
+            throw new ReactionsNotFoundException(String.format("Could not found any reaction with id "));
         }
     }
 }

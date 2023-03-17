@@ -12,5 +12,5 @@ public interface ReactionService {
     List<Reactions> getAllReactionsByCommentId(Long commentId);
     Reactions getReactionById(Long id) throws ReactionsNotFoundException;
     Reactions updateReaction(Long id, Reactions reactions) throws ReactionsNotFoundException;
-    Boolean deleteReaction(Long id) throws ReactionsNotFoundException;
+    Boolean deleteReaction(Long postId,Long userId) throws ReactionsNotFoundException;
 }
