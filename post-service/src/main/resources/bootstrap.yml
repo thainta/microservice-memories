@@ -9,6 +9,21 @@ spring:
     name: post-service
   profiles:
     active: dev
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/orcl
+    username: memories
+    password: memories
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+  redis:
+    host: localhost
+    port: 6379
+  kafka:
+    bootstrap-servers: localhost:9092
 
 server:
   port: 8000
