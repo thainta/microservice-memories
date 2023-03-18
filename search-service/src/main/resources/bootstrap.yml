@@ -6,7 +6,7 @@ spring:
         serviceId: configserver
       failFast: false
   application:
-    name: post-service
+    name: search-service
   profiles:
     active: dev
   datasource:
@@ -26,7 +26,7 @@ spring:
     bootstrap-servers: localhost:9092
 
 server:
-  port: 8000
+  port: 8002
 eureka:
   client:
     service-url:

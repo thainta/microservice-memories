@@ -1,4 +1,4 @@
-package com.example.postservice.exeption;
+package com.example.searchservice.exeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

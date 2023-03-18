@@ -65,6 +65,36 @@ services:
     deploy:
       mode: replicated
       replicas: 2
+  friend-service:
+    build:
+      context: /friend-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  search-service:
+    build:
+      context: /search-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
   main:
     build:
       context: /main

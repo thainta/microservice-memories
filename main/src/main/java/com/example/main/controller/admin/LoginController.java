@@ -36,8 +36,6 @@ public class LoginController {
     private HttpServletResponse response;
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private AuthenticationManager authenticationManager;
     @GetMapping("/login")
     public String showLoginPage(Model model){
@@ -64,9 +62,7 @@ public class LoginController {
             return "redirect:/pages/login";
         };
         Cookie cookie = new Cookie("Authorization", authenticationResponse.getToken());
-        Cookie usernameCookie = new Cookie("username", userService.getUserById(authenticationResponse.getUser_id()).getUserName());
         response.addCookie(cookie);
-        response.addCookie(usernameCookie);
 
         System.out.println(authenticationResponse);
         return "redirect:/pages/dashboard";

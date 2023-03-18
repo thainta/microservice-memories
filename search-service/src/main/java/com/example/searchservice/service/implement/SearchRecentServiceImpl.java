@@ -1,11 +1,11 @@
-package com.example.main.service.implement;
+package com.example.searchservice.service.implement;
 
-import com.example.main.entity.SearchRecentsEntity;
-import com.example.main.exeption.SearchRecentNotFoundException;
-import com.example.main.model.SearchRecents;
-import com.example.main.repository.repositoryJPA.SearchRecentsRepository;
-import com.example.main.repository.repositoryJPA.UsersRepository;
-import com.example.main.service.interfaces.SearchRecentService;
+import com.example.searchservice.entity.SearchRecentsEntity;
+import com.example.searchservice.exeption.SearchRecentNotFoundException;
+import com.example.searchservice.model.SearchRecents;
+import com.example.searchservice.repository.repositoryJPA.SearchRecentsRepository;
+import com.example.searchservice.repository.repositoryJPA.UsersRepository;
+import com.example.searchservice.service.interfaces.SearchRecentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

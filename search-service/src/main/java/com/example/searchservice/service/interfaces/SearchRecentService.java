@@ -1,7 +1,7 @@
-package com.example.main.service.interfaces;
+package com.example.searchservice.service.interfaces;
 
-import com.example.main.exeption.SearchRecentNotFoundException;
-import com.example.main.model.SearchRecents;
+import com.example.searchservice.exeption.SearchRecentNotFoundException;
+import com.example.searchservice.model.SearchRecents;
 
 import java.util.List;
 
