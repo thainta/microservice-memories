@@ -4,10 +4,7 @@ import com.example.main.exeption.CommentNotFoundException;
 import com.example.main.exeption.NotificationNotFoundException;
 import com.example.main.exeption.PostNotFoundException;
 import com.example.main.exeption.ReactionsNotFoundException;
-import com.example.main.model.Comments;
-import com.example.main.model.Notifications;
-import com.example.main.model.Posts;
-import com.example.main.model.Reactions;
+import com.example.main.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -26,8 +23,13 @@ public class PostServiceController {
     @Autowired
     RestTemplate restTemplate;
     @GetMapping("/posts")
-    public List<Object> getAllPosts(){
-        return new ArrayList<Object>();
+    public ResponseEntity<Object> getAllPosts(){
+        ParameterizedTypeReference<Object> responseType = new ParameterizedTypeReference<>() {};
+        String url = "http://POST-SERVICE/api/posts";
+        System.out.println(url);
+        ResponseEntity<Object> resp = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
+        Object listPosts = resp.getBody();
+        return ResponseEntity.ok().body(listPosts);
     }
 
     @GetMapping("/{userId}/posts")
