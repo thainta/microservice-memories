@@ -16,7 +16,7 @@
 
 **1. About Project**
 
- **A. First look :**
+**A. First look :**
 * Memories is a a social networking site where you can create and share your memories with friends, family and the online community. Memories is a great place to capture the important moments in your life and store them in a safe and secure space.
 * Memories has the basic features of a social networking site such as creating a personal profile, connecting with friends and family, sharing information and photos, and interacting, chatting with other users. In particular, Memories is committed to protecting user information and providing a safe and reliable online space for users.
 * We hope Memories will become an interested place and bring best moments to you.
@@ -25,7 +25,7 @@
 *	**Build:** Maven Project 4.0.0.
 *	Apache Tomcat® 9.x.
 *	**Relational database management system:** Oracle Database.
-* **Frontend:**  
+* **Frontend:**
   * ReactJS
   * Bootstrap
   * Redux
@@ -39,38 +39,34 @@
     * 	Hibernate core ORM: Hibernate.
     * 	Integrated development environment (IDE): IntelliJ IDEA Ultimate, VSCode.
     * 	Docker - an open source platform that enables developers to build, deploy, run, update and manage containers.
-**2. Architecture:**
+         **2. Architecture:**
   * **MVC Architecture Working**
-  ![image](https://user-images.githubusercontent.com/114813626/226091592-ebea7b36-615d-4493-b354-69aba3856051.png)
+    ![image](https://user-images.githubusercontent.com/114813626/226091592-ebea7b36-615d-4493-b354-69aba3856051.png)
   * **Software Architecture Working**
-  ![image](https://user-images.githubusercontent.com/114813626/226091654-47fb2b55-9c53-479f-aec6-c2fed256d29e.png)
+    ![image](https://user-images.githubusercontent.com/114813626/226091654-47fb2b55-9c53-479f-aec6-c2fed256d29e.png)
   * **Software Working MSA (microservice architecture)**
-  ![image](https://user-images.githubusercontent.com/114813626/226091693-93e54d8c-499c-4bb0-9ca0-9eb1466e58bd.png)
+    ![image](https://user-images.githubusercontent.com/114813626/226091693-93e54d8c-499c-4bb0-9ca0-9eb1466e58bd.png)
   * **Security Filter**
-  ![image](https://user-images.githubusercontent.com/114813626/226091893-a636386c-2998-4890-8008-ec053d21428a.png)
+    ![image](https://user-images.githubusercontent.com/114813626/226091893-a636386c-2998-4890-8008-ec053d21428a.png)
   * **Kafka Architecture**
-  ![image](https://user-images.githubusercontent.com/114813626/226091919-3ccb91dc-aef6-43a9-884c-0525e7057f47.png)
+    ![image](https://user-images.githubusercontent.com/114813626/226091919-3ccb91dc-aef6-43a9-884c-0525e7057f47.png)
+
 **3. Website's Service:**
-  There are main servives of Memories - Social Network website :
-    * 	Account & User Service
-    * Role Service
-    * Post Service
-    * PhotoInPost Service
-    * Comment Service
-    * Reaction Service
-    * Notification Service
-    * SearchRecent Service
-    * Chat Service
-    * Friend Request Service
-    
- ## Team member evaluation sheet
-   * Team Member :
-     * Trần Quốc Chung (Leader)
-     * Trần Anh Dũng
-     * Ngô Phước An
-     * Nguyễn Thừa An Thái
-   - Dung is the most skilled in the Team, he helped everyone in the process of completing the project a lot
-   - An is a hard worker, although he is late to the deadline, he has successfully completed the assigned tasks
-   - Thai in the process of working has performed very well, he completed the tasks very well and quickly
-   - Everyone in the team is very friendly and open, especially always helping each other in the learning process
+
+There are main services of Memories - Social Network website :
+
+      * main
+      * Post-Service
+      * Search-Service
+      * Friend-Service
+## Team member evaluation sheet
+* Team Member :
+  * Trần Quốc Chung (Leader)
+  * Trần Anh Dũng
+  * Ngô Phước An
+  * Nguyễn Thừa An Thái
+- Dung is the most skilled in the Team, he helped everyone in the process of completing the project a lot
+- An is a hard worker, although he is late to the deadline, he has successfully completed the assigned tasks
+- Thai in the process of working has performed very well, he completed the tasks very well and quickly
+- Everyone in the team is very friendly and open, especially always helping each other in the learning process
    
