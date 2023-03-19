@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,17 @@ public class PostTableController {
                 SpringBootApplicationConstant.DEFAULT_PAGE_KEYWORD).getContent();
         model.addAttribute("listPosts", listPosts);
         return new ModelMap();
+    }
+
+    @PutMapping("/posts/{id}/remove")
+    public String removePost(@PathVariable Long id){
+        postService.softDeletePostById(id);
+        return "redirect:/pages/PostTable";
+    }
+
+    @PutMapping("/posts/{id}/recover")
+    public String recoverPost(@PathVariable Long id){
+        postService.recoverPostById(id);
+        return "redirect:/pages/PostTable";
     }
 }

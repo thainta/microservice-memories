@@ -10,7 +10,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:oracle:thin:@//localhost:1521/orcl
+    url: jdbc:oracle:thin:@//localhost:1521/ORCLCDB
     username: memories
     password: memories
     driver-class-name: oracle.jdbc.OracleDriver

@@ -16,4 +16,6 @@ public interface PostService {
     Boolean deletePostById(long id) throws PostNotFoundException;
     Long countPost();
     Long countPostByMonth(String startDate, String endDate);
+    boolean softDeletePostById(long id);
+    boolean recoverPostById(long id);
 }

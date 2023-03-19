@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -26,6 +28,15 @@ public class AdminTableController {
 
     @GetMapping( "/NewAdmin")
     public ModelMap mmNewAdmin(Model model) {
+        model.addAttribute("account",new Accounts());
         return new ModelMap();
+    }
+
+    @PostMapping( "/NewAdmin")
+    public String NewAdmin(Model model, @ModelAttribute Accounts account) throws Exception {
+        model.addAttribute("account",account);
+        System.out.println(account.getEmail());
+        accountService.createAdminAccount(account);
+        return "redirect:/pages/AdminTable";
     }
 }

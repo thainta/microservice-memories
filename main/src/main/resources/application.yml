@@ -12,7 +12,7 @@ spring:
       filter:
         enabled: true
   datasource:
-    url: jdbc:oracle:thin:@//localhost:1521/orcl
+    url: jdbc:oracle:thin:@//localhost:1521/ORCLCDB
     username: memories
     password: memories
     driver-class-name: oracle.jdbc.OracleDriver
@@ -20,7 +20,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.OracleDialect
+    database-platform: org.hibernate.dialect.Oracle12cDialect
 
 
 eureka:

@@ -214,4 +214,20 @@ public class PostServiceImpl implements PostService {
     public Long countPostByMonth(String startDate, String endDate) {
         return postsRepository.countPostsByMonth(startDate, endDate);
     }
+
+    @Override
+    public boolean softDeletePostById(long id) {
+        PostsEntity entity = postsRepository.findById(id).get();
+        entity.setIsArchieved(1);
+        postsRepository.save(entity);
+        return true;
+    }
+
+    @Override
+    public boolean recoverPostById(long id) {
+        PostsEntity entity = postsRepository.findById(id).get();
+        entity.setIsArchieved(0);
+        postsRepository.save(entity);
+        return true;
+    }
 }

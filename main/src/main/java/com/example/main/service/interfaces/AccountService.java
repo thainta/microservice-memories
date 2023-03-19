@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface AccountService {
     AuthenticationResponse createAccount(Accounts account) throws Exception; //Done
+    AuthenticationResponse createAdminAccount(Accounts account) throws Exception;
     AuthenticationResponse authenticate(Accounts account) throws AccountNotFoundException;
     List<Accounts> getAllAccounts();
     boolean deleteAccount(Long id) throws AccountNotFoundException;

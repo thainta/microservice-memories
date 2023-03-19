@@ -46,18 +46,22 @@
                 <td th:utext="${post.content}"></td>
                 <td th:utext="${post.createAt}"></td>
                 <td th:utext="${post.updateAt}"></td>
-                <td th:if="${post.isArchieved == 0}">
+                <td th:if="${post.isArchieved}">
                   <label class="badge badge-danger">Banned</label>
                 </td>
-                <td th:if="${post.isArchieved}">
+                <td th:if="${post.isArchieved == 0}">
                   <label class="badge badge-success">Active</label>
                 </td>
 <!--                <td th:utext="${post.isArchieved}"></td>-->
-                <td th:if="${post.isArchieved}"}>
-                  <a class="menu-icon mdi mdi-delete-forever icon-md user-select-auto" href="#"></a>
+                <td th:if="${post.isArchieved == 0}">
+                  <form action="#" th:action="@{/pages/posts/{id}/remove(id = ${post.postId})}" th:method="put" >
+                    <button class=" btn menu-icon mdi mdi-comment-remove-outline icon-mdi"></button>
+                  </form>
                 </td>
-                <td th:if="${post.isArchieved == 0}"}>
-                  <a class="menu-icon mdi mdi-backup-restore icon-md user-select-auto" href="#"></a>
+                <td th:if="${post.isArchieved}">
+                  <form action="#" th:action="@{/pages/posts/{id}/recover(id = ${post.postId})}" th:method="put" >
+                    <button type="submit" class="btn menu-icon mdi mdi-backup-restore icon-mdi"></button>
+                  </form>
                 </td>
               </tr>
               </tbody>
@@ -67,8 +71,6 @@
       </div>
     </div>
   </div>
-
-
 </section>
 </body>
 </html>

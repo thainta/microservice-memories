@@ -38,9 +38,7 @@ public class DashboardController {
         Long totalAdminUser = accountService.countAllByRoles(2L);
         Long totalUser = totalAdminUser + accountService.countAllByRoles(1L);
         List<Accounts> listAccounts= accountService.getRecentAccountRegister();
-        String username = CookieUtils.getCookie(request, "username").getValue();
 
-        model.addAttribute("username", username);
         model.addAttribute("countPost", countPost);
         model.addAttribute("chartData", getChartData());
         model.addAttribute("totalUser", totalUser);

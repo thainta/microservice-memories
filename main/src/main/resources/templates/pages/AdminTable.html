@@ -13,7 +13,7 @@
         <div class="card-body">
           <h4 class="card-title">Accounts table</h4>
           <div class="table-responsive">
-            <table class="text-center table table-bordered">
+            <table class="text-center table table-striped">
               <thead>
               <tr>
                 <th>
@@ -53,7 +53,6 @@
                   <label class="badge badge-success">Active</label>
                 </td>
                 <td th:if="${account.isArchieved == 0}">
-
                   <form action="#" th:action="@{/pages/accounts/{id}/remove(id = ${account.acc_id})}" th:method="put" >
                     <button class=" btn menu-icon mdi mdi-account-remove icon-mdi"></button>
                   </form>
