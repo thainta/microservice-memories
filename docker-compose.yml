@@ -40,6 +40,29 @@ services:
       - main
     ports:
       - "8765:8765"
+  zookeeper:
+    image: 'bitnami/zookeeper:3'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+    ports:
+      - '9092:9092'
+    depends_on:
+      - eureka-server
+      - zookeeper
+  redis-server:
+    container_name: redis
+    image: 'redis'
+    ports:
+      - "6379:6379"
+    depends_on:
+      - eureka-server
   oracle-db:
     image: oracle/database:19.3.0-ee
     hostname: oracle
@@ -48,7 +71,6 @@ services:
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=password
       - ORACLE_ALLOW_REMOTE=true
-
     ports:
       - 1521:1521
       - 5500:5500
@@ -68,6 +90,27 @@ services:
       dockerfile: Dockerfile
     command: mvn clean install -Dskiptest
     environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - spring.datasource.url=jdbc:oracle:thin:@//oracle-db:1521/ORCLCDB
+      - spring.datasource.username=memories
+      - spring.datasource.password=memories
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+      - oracle-db
+      - kafka
+    deploy:
+      mode: replicated
+      replicas: 2
+  friend-service:
+    build:
+      context: /friend-service
+      dockerfile: Dockerfile
+    environment:
       - spring.datasource.url=jdbc:oracle:thin:@//oracle-db:1521/ORCLCDB
       - spring.datasource.username=memories
       - spring.datasource.password=memories
@@ -82,38 +125,25 @@ services:
     deploy:
       mode: replicated
       replicas: 2
-#  friend-service:
-#    build:
-#      context: /friend-service
-#      dockerfile: Dockerfile
-#    environment:
-#      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
-#      - JAVA_OPTS=
-#        -DEUREKA_SERVER=http://eureka-server:8761/eureka
-#    restart: on-failure
-#    depends_on:
-#      - eureka-server
-#      - configserver
-#      - oracle-db
-#    deploy:
-#      mode: replicated
-#      replicas: 2
-#  search-service:
-#    build:
-#      context: /search-service
-#      dockerfile: Dockerfile
-#    environment:
-#      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
-#      - JAVA_OPTS=
-#        -DEUREKA_SERVER=http://eureka-server:8761/eureka
-#    restart: on-failure
-#    depends_on:
-#      - eureka-server
-#      - configserver
-#      - oracle-db
-#    deploy:
-#      mode: replicated
-#      replicas: 2
+  search-service:
+    build:
+      context: /search-service
+      dockerfile: Dockerfile
+    environment:
+      - spring.datasource.url=jdbc:oracle:thin:@//oracle-db:1521/ORCLCDB
+      - spring.datasource.username=memories
+      - spring.datasource.password=memories
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+      - oracle-db
+    deploy:
+      mode: replicated
+      replicas: 2
   main:
     container_name: main
     build:
@@ -128,6 +158,8 @@ services:
       - JAVA_OPTS=
         -DEUREKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
+    ports:
+      - "8100:8100"
     depends_on:
       - eureka-server
     deploy:

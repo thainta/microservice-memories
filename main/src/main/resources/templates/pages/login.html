@@ -12,7 +12,7 @@
   <div>
     <img class="img-fluid" th:src="@{/images/logo.png}" />
   </div>
-  <form th:action="@{/pages/doLogin}" th:method="post" th:object="${account}"  style="max-width: 350px; margin: 0 auto;">
+  <form action="#" th:action="@{/pages/doLogin}" th:method="post" th:object="${account}"  style="max-width: 350px; margin: 0 auto;">
 
     <div th:if="${param.error}">
       <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>

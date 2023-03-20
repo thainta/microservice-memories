@@ -1,5 +1,6 @@
 package com.example.main.controller;
 
+import com.example.main.constant.SpringBootApplicationConstant;
 import com.example.main.exeption.CommentNotFoundException;
 import com.example.main.exeption.NotificationNotFoundException;
 import com.example.main.exeption.PostNotFoundException;
@@ -17,16 +18,22 @@ import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value ="/api")
 public class PostServiceController {
     @Autowired
     RestTemplate restTemplate;
     @GetMapping("/posts")
-    public ResponseEntity<Object> getAllPosts(){
+    public ResponseEntity<Object> getAllPosts(
+            @RequestParam(value = "keyword",defaultValue = SpringBootApplicationConstant.DEFAULT_PAGE_KEYWORD,required = false) String keyword,
+            @RequestParam(value = "pageNo", defaultValue = SpringBootApplicationConstant.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = SpringBootApplicationConstant.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = SpringBootApplicationConstant.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = SpringBootApplicationConstant.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+    ){
         ParameterizedTypeReference<Object> responseType = new ParameterizedTypeReference<>() {};
-        String url = "http://POST-SERVICE/api/posts";
+        String url = String.format("http://POST-SERVICE/api/posts?pageNo=%s", pageNo);
         System.out.println(url);
         ResponseEntity<Object> resp = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
         Object listPosts = resp.getBody();
